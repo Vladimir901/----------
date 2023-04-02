@@ -12,7 +12,6 @@ function VotingResultsPage() {
         if(data)
             {
             let countVoters = Number(data.forAnswers_first)+Number(data.againstAnswers_first)+Number(data.neutralAnswers_first);
-			alert(countVoters)
 			let result = 100*Number(data.forAnswers_first)/(countVoters)>countVoters/2+1;                         
             if(result) NotificationManager.success("Первый вопрос будет выставлен на обсуждение.","Вопрос №1", 5000)
 			countVoters = Number(data.forAnswers_second)+Number(data.againstAnswers_second)+Number(data.neutralAnswers_second);

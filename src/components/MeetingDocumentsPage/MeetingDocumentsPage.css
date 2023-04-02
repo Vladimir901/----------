@@ -11,7 +11,7 @@
     background: rgba(242, 242, 242, 0.7);
     border-radius: 20px;
     width: 40%;
-    padding: 5%;
+    padding: 3%;
 }
 .headerText_container{
     text-align: center;
@@ -33,4 +33,18 @@
 }
 .managementProtocol_container a, .meetingProtocol_container a, .decisionProtocol_container a{
     color: black;
+}
+.btn_meetingdocsPage{
+    background-color: rgb(105, 45, 45);
+    border: none;
+    border-radius: 10px;
+    padding: 2%;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.btn_container_meetingdocsPage{
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
 }

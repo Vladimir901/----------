@@ -10,7 +10,7 @@
 .form_container_mpcPage{
     background: rgba(242, 242, 242, 0.7);
     border-radius: 20px;
-    width: 60%;
+    width: 50%;
     padding-top: 1%;
     padding-bottom: 1%;
     padding-left: 3%;
@@ -43,14 +43,12 @@
 .meetingDateAndPlace_link a{
     font-size: 16px;
     color: black;
-    padding: 1%;
     display: flex;
     justify-content: center;
 }
 .meetingDateAndPlace_select{
     border: none;
     border-radius: 5px;
-    margin-bottom: 2%;
     width: 75%;
     overflow: scroll;
     overflow-x:auto;
@@ -64,8 +62,8 @@
     justify-content: center;
 }
 .headerText_mpcPage, .questionTitle_text{
-    margin-top: 1%;
-    margin-bottom: 1%;
+    /* margin-top: 1%;
+    margin-bottom: 1%; */
 }
 .errorText_mpcPage{
     color: red;
