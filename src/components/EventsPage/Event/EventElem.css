@@ -1,0 +1,10 @@
+.eventElem{
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 2%;
+    margin-bottom: 1%;
+}
+.inline_info{
+    display: flex;
+    justify-content: space-between;
+}

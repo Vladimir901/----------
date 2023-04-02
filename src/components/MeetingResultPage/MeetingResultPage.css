@@ -1,0 +1,52 @@
+.main_container_resultPage{
+    min-height: 100vh;
+    background-image: url('../images/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form_container_resultPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    width: 30%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.inputText_resultPage{
+    border: none;
+    border-radius: 5px;
+    height: 2em;
+    width: 40%;
+    margin-bottom: 1%;
+}
+.inputTextArea_resultPage{
+    width: 60%;
+    height: 5em;
+    border: none;
+    border-radius: 5px;
+}
+.resultPage_btn_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn_resultPage{
+    margin-top: 4%;
+    background-color: rgb(105, 45, 45);
+    border: none;
+    border-radius: 10px;
+    width: 14em;
+    height: 3em;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.headerText_resultPage{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}

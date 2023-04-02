@@ -1,0 +1,36 @@
+.main_container_meetingdocsPage{
+    min-height: 100vh;
+    background-image: url('../images/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form_container_meetingdocsPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    width: 40%;
+    padding: 5%;
+}
+.headerText_container{
+    text-align: center;
+    margin: 2%;
+}
+.meetingDocs_container{
+    display: flex;
+    flex-direction: column;
+}
+.managementProtocol_container, .meetingProtocol_container, .decisionProtocol_container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #F2F2F2;;
+    border-radius: 20px;
+    padding: 2%;
+    margin: 1%;
+    font-size: 18px;
+}
+.managementProtocol_container a, .meetingProtocol_container a, .decisionProtocol_container a{
+    color: black;
+}

@@ -1,0 +1,83 @@
+.main_container_user{
+    min-height: 100vh;
+    background: url('../images/bg1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container_user{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 30px;
+    padding: 2%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.dropdown_user, .btnCreate_user{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    padding: 3%;
+    margin-right: 8%;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 5%;
+}
+.dropdown_user{
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    align-items: center;
+}
+.btnCreate_user{
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+}
+.headerContent_container_user{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    justify-content: space-between;
+}
+.nameEventsText_user{
+    margin-bottom: 1%;
+}
+.nameEventsText_user:last-of-type{
+    margin-top: 2%;
+}
+.tabs{
+    display: flex;
+}
+.active_tab{
+    color: black;
+    margin: 2px;    
+}
+.inactive_tab{
+    color: gray;
+    margin: 2px;
+    cursor: pointer;
+}
+@media (max-width: 800px){
+    .headerContent_container_user{
+        font-size: 12px;
+        grid-template-columns: 3fr 3fr;
+    }
+    .dropdown_user, .btnCreate_user{
+        font-size: 12px;
+        padding: 3%;
+        margin-right: 10%;
+    }
+}
+@media (max-width: 600px){
+    .headerContent_container_user{
+        font-size: 11px;
+    }
+    .dropdown_user, .btnCreate_user{
+        font-size: 10px;
+        padding: 1%;
+        margin-right: 5%;
+    }
+}

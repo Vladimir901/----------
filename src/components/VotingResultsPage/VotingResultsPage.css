@@ -1,0 +1,46 @@
+.main_container_votingResultsPage{
+    min-height: 100vh;
+    background-image: url('../images/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form_container_votingResultsPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    width: 50%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 0%;
+}
+.btn_votingResultsPage{
+    background-color: rgb(105, 45, 45);
+    border: none;
+    border-radius: 10px;
+    padding: 2%;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-right: 8%;
+}
+.headerText_votingResultsPage{
+    text-align: center;
+    margin-bottom: 1%;
+}
+.inputText_votingResultsPage{
+    border: none;
+    border-radius: 5px;
+    height: 2em;
+    width: 40%;
+    margin-bottom: 1%;
+}
+.votingResultsPage_btn_container{
+    display: flex;
+    justify-content: center;
+}
+.voting_text_votingResultsPage{
+    margin-bottom: 1%;
+}

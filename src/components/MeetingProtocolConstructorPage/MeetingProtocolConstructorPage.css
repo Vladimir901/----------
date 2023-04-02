@@ -1,0 +1,101 @@
+.main_container_mpcPage{
+    min-height: 100vh;
+    background-image: url('../images/bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form_container_mpcPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    width: 60%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 0%;
+}
+.meetingTypeContainer_mpcPage, .meetingFormContainer_mpcPage{
+ margin-bottom: 1%;
+}
+.inputRadio_mpcPage{
+    margin-right: 2%;
+}
+.btn_mpcPage{
+    background-color: rgb(105, 45, 45);
+    border: none;
+    border-radius: 10px;
+    width: 14em;
+    height: 3em;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.inputText_mpcPage{
+    border: none;
+    border-radius: 5px;
+    height: 2em;
+    width: 40%;
+    margin-bottom: 1%;
+    font-size: 14px;
+}
+.meetingDateAndPlace_link a{
+    font-size: 16px;
+    color: black;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+}
+.meetingDateAndPlace_select{
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 2%;
+    width: 75%;
+    overflow: scroll;
+    overflow-x:auto;
+    overflow-y:auto;
+    font-size: 16px;
+}
+.meetingDateAndPlace_btn_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.headerText_mpcPage, .questionTitle_text{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+.errorText_mpcPage{
+    color: red;
+}
+.uploadFile_btn input[type='file']{
+    border: none;
+    border-radius: 5px;
+}
+#file-upload-button{
+    background-color: #ffffff;
+}
+@media (max-width: 1200px){
+    .form_container_mpcPage{     
+        background: rgba(242, 242, 242, 0.7);
+        border-radius: 20px;
+        width: 50%;
+        padding-top: 0%;
+        padding-bottom: 1%;
+        padding-left: 4%;
+        padding-right: 5%;
+    }
+}
+@media (max-width: 500px){
+    .form_container_mpcPage{     
+        background: rgba(242, 242, 242, 0.7);
+        border-radius: 20px;
+        width: 70%;
+        padding-top: 0%;
+        padding-bottom: 1%;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}

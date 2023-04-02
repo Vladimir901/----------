@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+.header{
+    position: absolute;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    color: white;
+}
+.nav{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+}
+.logo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.nav a, .nav_dropdown{
+    padding: 2% 3% 2% 3%;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+.nav a h4, .nav_dropdown{
+    border: 2px solid #F2F2F2;
+    border-radius: 10px;
+    padding: 3px;
+}
+a{
+    color: white;
+}
+@media (max-width: 1030px){
+    h2{
+        font-size: 16px;
+    }
+    h4{
+        font-size: 10px;
+    }
+}
+@media (max-width: 700px){
+    h2{
+        padding: 1%;
+    }
+    .nav{
+        display: none;
+    }
+    .header{
+        margin-top: 4%;
+        grid-template-columns: 30% 70%;
+    }
+}
