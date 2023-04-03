@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom'
 import { NotificationManager } from 'react-notifications'
 import { Tooltip } from 'react-tooltip';
+import Select from 'react-select'
 import 'react-tooltip/dist/react-tooltip.css' 
 import Header from '../Header/Header'
 import './MeetingProtocolConstructorPage.css'
@@ -30,6 +31,29 @@ function MeetingProtocolConstructorPage() {
     //alert(JSON.stringify(data.questionsSelection))
     //reset() сброс данных формы
   }
+  const [selectedOption, setSelectedOption] = useState(null);
+  const meetingQuestions = [
+    {
+      value: "Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год", 
+      label: "Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год",
+      disabled: false,
+    },
+    {
+      value: "Утверждение расходной сметы товарищества на 2023г. финансовый год", 
+      label: "Утверждение расходной сметы товарищества на 2023г. финансовый год",
+      disabled: false,
+    },
+    {
+      value: "Принятие новых членов в СНТ", 
+      label: "Принятие новых членов в СНТ",
+      disabled: true,
+    },
+    {
+      value: "Утверждение приходно-расходной сметы и принятие решения о ее исполнении", 
+      label: "Утверждение приходно-расходной сметы и принятие решения о ее исполнении",
+      disabled: true
+    },
+  ]
   return (
     <div>
         <Header fio={'Председателев П.П.'} snt={'СНТ1'}/>
@@ -58,12 +82,13 @@ function MeetingProtocolConstructorPage() {
                 <label for='r23'>Очно-заочная</label>
                 </div>
                 <h4 className='questionTitle_text'>3. По какому поводу проводится собрание? </h4>
-                <select multiple size={3} className='meetingDateAndPlace_select' {...register('questionsSelection',{required: true})}>
+                {/* <select multiple size={3} className='meetingDateAndPlace_select' {...register('questionsSelection',{required: true})}>
                   <option value="Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год" >Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год</option>
                   <option value="Утверждение расходной сметы товарищества на 2023г. финансовый год" >Утверждение расходной сметы товарищества на 2023г. финансовый год</option>
                   <option value="Принятие новых членов в СНТ" disabled>Принятие новых членов в СНТ</option>
                   <option value="Утверждение приходно-расходной сметы и принятие решения о ее исполнении" disabled>Утверждение приходно-расходной сметы и принятие решения о ее исполнении</option>
-                </select>
+                </select> */}
+                <Select defaultValue={selectedOption} options={meetingQuestions} isSearchable={true} isMulti={true} placeholder="Выберите пункт..."  className='meetingDateAndPlace_select'/>
                 <h4 className='questionTitle_text'>4. Введите место и время проведения </h4>
                 <input  type='date' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Дата' {...register('dateOfMeeting',{required: 'Введите дату встречи'})}/> 
                 {errors.dateOfMeeting && <div className='errorText_mpcPage'>{errors?.dateOfMeeting.message}</div>}
