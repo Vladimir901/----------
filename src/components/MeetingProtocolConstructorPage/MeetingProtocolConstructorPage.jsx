@@ -13,8 +13,20 @@ function MeetingProtocolConstructorPage() {
   const navigate = useNavigate()
   const onSubmit = (data) =>{
     if(data)
+    {
+      var d1 = new Date("2011/02/15"); //"now"
+      var d2 = new Date("2011/02/01");  // some date
+      var dnow =new Date()
+      var dmeet = new Date(data.dateOfMeeting)
+      if(Math.abs(dmeet-dnow)<Math.abs(d1-d2))
+      { NotificationManager.error("Создать уведомление можно не позднее, чем за 2 недели до его начала","Ошибка", 5000)
+        return;
+      }
+      // if(data.dateOfMeeting )
       NotificationManager.success("Уведомление успешно создано","Выполнено", 3000)
-      setTimeout(()=>{navigate('/meetingresult', { questions: data.questionsSelection })},3000)
+      setTimeout(()=>{navigate('/user/1/events', { })},3000)
+    }
+      
     //alert(JSON.stringify(data.questionsSelection))
     //reset() сброс данных формы
   }
@@ -46,7 +58,7 @@ function MeetingProtocolConstructorPage() {
                 <label for='r23'>Очно-заочная</label>
                 </div>
                 <h4 className='questionTitle_text'>3. По какому поводу проводится собрание? </h4>
-                <select multiple size={2} className='meetingDateAndPlace_select' {...register('questionsSelection',{required: true})}>
+                <select multiple size={3} className='meetingDateAndPlace_select' {...register('questionsSelection',{required: true})}>
                   <option value="Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год" >Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год</option>
                   <option value="Утверждение расходной сметы товарищества на 2023г. финансовый год" >Утверждение расходной сметы товарищества на 2023г. финансовый год</option>
                   <option value="Принятие новых членов в СНТ" disabled>Принятие новых членов в СНТ</option>

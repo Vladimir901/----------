@@ -15,6 +15,7 @@ function EventsPage() {
       text: "Настоящим уведомляем о проведении очередного собрания членов СНТ в очно-заочной форме",
       datetime: "27.03.2023 17:30-18:00",
       place: "ул. Ленина, д.14 / сайт СНТ",
+      link: '/meetingresult'
     },
   ])
   const [pastEvents, setPastEvents] = useState([
@@ -73,7 +74,7 @@ function EventsPage() {
                 <div className="pastEvents_user">
                 <h3 className='nameEventsText_user'>Прошедшие</h3>
                 {pastEvents.map((elem)=>{
-                 return <EventElem key={elem.id} event={elem} />
+                 return <EventElem key={elem.id} event={elem} link={'/user/:id/events'} />
                 })}
                 </div>
               </div>

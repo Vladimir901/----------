@@ -20,7 +20,7 @@ function VotingResultsPage() {
 			NotificationManager.success("Протокол создан успешно","Выполнено", 5000)
 			NotificationManager.success("Уведомления успешно отправлены","Выполнено", 5000)
 
-            setTimeout(()=>{navigate('/meetingresult', {  })},5000) 
+            setTimeout(()=>{navigate('/user/1/events', {  })},5000) 
             
         }
         //alert(JSON.stringify(data.questionsSelection))
