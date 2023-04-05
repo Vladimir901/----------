@@ -13,8 +13,10 @@ import VotingResultsPage from './components/VotingResultsPage/VotingResultsPage'
 import MeetingResultPage from './components/MeetingResultPage/MeetingResultPage';
 import { MeetingDocumentsPage } from './components/MeetingDocumentsPage/MeetingDocumentsPage';
 import MeetingProtocolConstructorPage from './components/MeetingProtocolConstructorPage/MeetingProtocolConstructorPage';
+import FAQPage from './components/FAQPage/FAQPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -28,6 +30,7 @@ root.render(
                 <Route path="/meetingresult" element={<MeetingResultPage/>} />
                 <Route path="/meetingdocs" element={<MeetingDocumentsPage/>} />
                 <Route path="/votingresults" element={<VotingResultsPage/>} />
+                <Route path="/faq" element={<FAQPage/>} />
                 <Route path="/calc" element={<h1>Калькуляторы</h1>} />
                 <Route path="*" element={<NotFound/>} />               
               </Routes>

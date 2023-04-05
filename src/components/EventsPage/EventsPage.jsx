@@ -59,7 +59,7 @@ function EventsPage() {
               {isAdmin ? <h3>Личный кабинет председателя СНТ</h3> : <h3>Личный кабинет члена СНТ</h3>}                        
               <div className="dropdown_user">Председателев П.П.</div>              
               
-              <div className='tabs'><h4 className={isEventsPage ? 'active_tab' : 'inactive_tab'} onClick={(e)=> {e.preventDefault(); setIsEventsPage(true) }}>События</h4> / <h4 className={!isEventsPage ? 'active_tab' : 'inactive_tab'} onClick={(e)=> {e.preventDefault(); setIsEventsPage(false)}}>Архив документов</h4></div>
+              <div className='tabs'><h4 className={isEventsPage ? 'active_tab' : 'inactive_tab'} onClick={(e)=> {e.preventDefault(); setIsEventsPage(true) }}>События</h4> / <h4 className={!isEventsPage ? 'active_tab' : 'inactive_tab'} onClick={(e)=> {e.preventDefault(); setIsEventsPage(false)}}>Архив актов органов</h4></div>
               
               {isAdmin && <button className="btnCreate_user" onClick={(e)=>{e.preventDefault(); navigate('/protocol');}}>+ Создать</button>}
               </div>

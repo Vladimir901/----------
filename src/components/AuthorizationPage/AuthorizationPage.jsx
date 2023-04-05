@@ -1,16 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './AuthorizationPage.css'
 import Header from '../Header/Header'
 import { useNavigate ,Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import axios from 'axios'
+import { NotificationManager } from 'react-notifications'
 
 function AuthorizationPage() {
   const {register, formState: {errors, isValid}, handleSubmit, reset} = useForm({mode: 'onSubmit'})
   const navigate = useNavigate()
   const onSubmit = (data) =>{
-    if(data.login='89191234567' && data.password==="1234")
-      navigate('/user/1/events')
-    //reset() сброс данных формы
+    if(data)
+    {  
+    axios.get("http://localhost:8000/api/users")
+    .then(res => res.data.forEach((account) => 
+    { 
+      if(data.login == account.email)
+      {
+        axios.get(`http://localhost:8000/api/users/${data.login}/`)
+        .then(res1 => {
+          if(data.password == res1.data.password)
+          { navigate(`/user/${res1.data.id}/events`) }
+         else NotificationManager.error("Введён неверный пароль", "Ошибка", 3000)})        
+      }
+    })) 
+    }    
+    //reset() сброс данных формы ${data.login}/${data.password}
   }
   return (
     <div>

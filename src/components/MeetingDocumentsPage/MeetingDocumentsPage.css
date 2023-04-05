@@ -10,35 +10,35 @@
 .form_container_meetingdocsPage{
     background: rgba(242, 242, 242, 0.7);
     border-radius: 20px;
-    width: 40%;
+    width: 50%;
     padding: 3%;
+    padding-bottom: 2%;
 }
 .headerText_container{
     text-align: center;
-    margin: 2%;
+    margin: 1%;
+    margin-bottom: 3%;
 }
 .meetingDocs_container{
     display: flex;
     flex-direction: column;
 }
-.managementProtocol_container, .meetingProtocol_container, .decisionProtocol_container{
-    width: 100%;
+.managementDocs_container{
+    width: 95%;
     display: flex;
-    justify-content: space-between;
+    justify-content: baseline;
     background: #F2F2F2;;
     border-radius: 20px;
     padding: 2%;
     margin: 1%;
     font-size: 18px;
 }
-.managementProtocol_container a, .meetingProtocol_container a, .decisionProtocol_container a{
-    color: black;
-}
 .btn_meetingdocsPage{
     background-color: rgb(105, 45, 45);
     border: none;
     border-radius: 10px;
     padding: 2%;
+    width: 25%;
     font-size: 16px;
     color: #ffffff;
     cursor: pointer;
@@ -47,4 +47,11 @@
     margin-top: 2%;
     display: flex;
     justify-content: center;
+}
+.downloadDocs_link{
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 1%;
 }

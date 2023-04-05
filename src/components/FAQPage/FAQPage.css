@@ -1,0 +1,22 @@
+.main_container_faqPage{
+    min-height: 100vh;
+    background-image: url('../images/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.content_container_faqPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 30px;
+    padding: 1%;
+    max-width: 80%;
+}
+.item_faqPage{
+    margin-top: 1%;
+}
+.answerLinks a{
+    color: rgb(20, 74, 173);
+}

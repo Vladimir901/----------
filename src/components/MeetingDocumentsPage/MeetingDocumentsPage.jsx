@@ -26,18 +26,16 @@ function MeetingDocumentsPage() {
                 <h1>Документы</h1>
                 </div>
                 <div className="meetingDocs_container">
-                <div className="managementProtocol_container">
+                <div className="managementDocs_container">
                     <h4>Протокол правления</h4>
-                    <a href='#' download={''}>Скачать</a>
                 </div>
-                <div className="meetingProtocol_container">
-                    <h4>Протокол собрания</h4>
-                    <a href='#' download={''}>Скачать</a>
+                <div className="managementDocs_container">
+                    <h4>Протокол собрания</h4>                    
                 </div>
-                <div className="decisionProtocol_container">
+                <div className="managementDocs_container">
                     <h4>Решение</h4>
-                    <a href='snt/components/documents/Decision_02_04_2023.docx' download>Скачать</a>
                 </div>
+                <a href='#' download={''} className='downloadDocs_link'>Скачать архивом</a>
                 </div>
                 <div className="btn_container_meetingdocsPage">
                 <input type='submit' className='btn_meetingdocsPage' value="На главную"/>

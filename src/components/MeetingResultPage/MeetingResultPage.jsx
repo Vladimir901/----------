@@ -3,7 +3,6 @@ import './MeetingResultPage.css'
 import Header from '../Header/Header'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import QuestionAndDecisionElem from './QuestionAndDecisionElem/QuestionAndDecisionElem'
 import { useForm } from 'react-hook-form'
 
 function MeetingResultPage(props) {
@@ -25,7 +24,7 @@ function MeetingResultPage(props) {
       <div className="main_container_resultPage">    
           <div className="form_container_resultPage">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className='headerText_resultPage'>Введите результаты собрания</h1>
+            <h2 className='headerText_resultPage'>Введите результаты собрания</h2>
             
             <h4>1. Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год</h4>
             <h5>За</h5><input type='text' className='inputText_resultPage' placeholder='Количество голосов'/>
