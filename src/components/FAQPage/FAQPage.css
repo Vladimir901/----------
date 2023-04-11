@@ -1,17 +1,27 @@
 .main_container_faqPage{
-    min-height: 100vh;
+    height: 100vh;
     background-image: url('../images/bg1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+}
+.container_faqPage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+
 }
 .content_container_faqPage{
     background: rgba(242, 242, 242, 0.7);
     border-radius: 30px;
+    height: 80vh;
     padding: 1%;
+    overflow-y: scroll;
     max-width: 80%;
 }
 .item_faqPage{

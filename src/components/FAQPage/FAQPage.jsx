@@ -16,18 +16,19 @@ const handleToggle = (index) => {
     <div>
         <Header/>
         <div className='main_container_faqPage' >
-            
+            <div className="container_faqPage">
             <div className="content_container_faqPage">
             <h1>Вопросы и ответы</h1>
       {information.map((item, index) => {
         return <div key={index} className='item_faqPage'>
             <div className="question">
-            <b>Вопрос №{index+1}. {item.question}</b></div>
+            <b>Вопрос: {item.question}</b></div>
             <div className="answer">
                Ответ: <div className='answerLinks' dangerouslySetInnerHTML={{__html: item.answer}}></div>
                </div>
         </div> 
       })}
+      </div>
       </div>
         </div>
     </div>

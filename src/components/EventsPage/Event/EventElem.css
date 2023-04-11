@@ -3,6 +3,8 @@
     border-radius: 20px;
     padding: 2%;
     margin-bottom: 1%;
+    font-size: 20px;
+    cursor: pointer;
 }
 .inline_info{
     display: flex;

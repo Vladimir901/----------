@@ -19,7 +19,8 @@ function RegistrationPage() {
             formdata.append("email", data.login+"");
             formdata.append("password", data.password+"");     
             let res = axios.post("http://localhost:8000/api/users", formdata);
-            navigate(`/user/${data.login}/events`)
+            alert(JSON.stringify(res))
+            // navigate(`/user/${data.login}/events`)
           }
       }
       else NotificationManager.warning("Аккаунт с таким адресом почты уже есть. Войдите через форму авторизации","Внимание", 3000)

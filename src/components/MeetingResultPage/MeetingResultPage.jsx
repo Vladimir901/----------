@@ -14,13 +14,13 @@ function MeetingResultPage(props) {
   ])
   const onSubmit = (data) =>{
     if(data)
-      navigate('/meetingdocs')
+      navigate('/meetingdocs/1')
     //alert(JSON.stringify(data.questionsSelection))
     //reset() сброс данных формы
   }
   return (
     <div>
-      <Header fio={'Председателев П.П.'} snt={'СНТ1'}/>
+      <Header/>
       <div className="main_container_resultPage">    
           <div className="form_container_resultPage">
           <form onSubmit={handleSubmit(onSubmit)}>

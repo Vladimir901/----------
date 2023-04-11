@@ -20,7 +20,25 @@ function AuthorizationPage() {
         axios.get(`http://localhost:8000/api/users/${data.login}/`)
         .then(res1 => {
           if(data.password == res1.data.password)
-          { navigate(`/user/${res1.data.id}/events`) }
+          { 
+            localStorage.setItem('user_id', res1.data.id)
+            localStorage.setItem('user_fio', res1.data.last_name+" "+res1.data.first_name+" "+res1.data.middle_name)
+            localStorage.setItem('user_fio_short',res1.data.last_name+" "+res1.data.first_name.split('')[0]+"."+res1.data.middle_name.split('')[0]+".")
+            localStorage.setItem('login',res1.data.email)
+            localStorage.setItem('password',res1.data.password)
+            localStorage.setItem('snt_id',res1.data.snt_id)
+            localStorage.setItem('is_gover', res1.data.is_gover)
+            localStorage.setItem('is_admin',res1.data.is_admin)
+            localStorage.setItem('is_verif', res1.data.is_verif)
+
+            axios.get(`http://localhost:8000/api/snt`)
+            .then(res2 => res2.data.forEach((item)=>{
+              if(res1.data.snt_id==item.id){
+                localStorage.setItem('snt_name',item.name)
+                navigate(`/user/${res1.data.id}/events`) 
+              }
+            }))
+          }
          else NotificationManager.error("Введён неверный пароль", "Ошибка", 3000)})        
       }
     })) 

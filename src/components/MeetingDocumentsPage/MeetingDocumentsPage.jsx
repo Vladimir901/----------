@@ -18,7 +18,7 @@ function MeetingDocumentsPage() {
       }
     return (   
     <div>
-        <Header fio={'Председателев П.П.'} snt={'СНТ1'}/>
+        <Header/>
         <div className="main_container_meetingdocsPage">    
             <div className="form_container_meetingdocsPage">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -28,6 +28,12 @@ function MeetingDocumentsPage() {
                 <div className="meetingDocs_container">
                 <div className="managementDocs_container">
                     <h4>Протокол правления</h4>
+                </div>
+                <div className="managementDocs_container">
+                    <h4>Уведомление о проведении общего собрания</h4>
+                </div>
+                <div className="managementDocs_container">
+                    <h4>Бюллетень для голосования общего собрания</h4>
                 </div>
                 <div className="managementDocs_container">
                     <h4>Протокол собрания</h4>                    
