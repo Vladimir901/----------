@@ -5,17 +5,9 @@ function Meeting(props) {
   return (
     <div>
         <h4 className='meetingDatetimeText'>Событие {props.elem.datetimeMeeting}</h4>
-        <div className='ManageProtocolContainer'>
-            <h5 className='documentName_text'>Протокол правления</h5>
-            <a href='#' className='download_link' download>Скачать</a>
-        </div>
-        <div className='MeetingProtocolContainer'>
-            <h5 className='documentName_text'>Протокол собрания</h5>
-            <a href='#' className='download_link' download>Скачать</a>
-        </div>
-        <div className='DecisionContainer'>
-            <h5 className='documentName_text'>Решение</h5>
-            <a href='#' className='download_link' download>Скачать</a>
+        <div className='archive_container_events'>
+            <h5 className='documentName_text'>Архив документов</h5>
+            <a href={'http://127.0.0.1:8000/download/18/'} className='download_link' download>Скачать</a>
         </div>
     </div>
   )

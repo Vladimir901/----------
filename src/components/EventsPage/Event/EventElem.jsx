@@ -10,7 +10,7 @@ function EventElem(props) {
 
   const handleClick = ()=>{
     if(props.event.is_solved){
-      NotificationManager.error(`Собрание уже проведено.`, "Ошибка", 3000)
+      NotificationManager.error(`Собрание уже проведено. Для ознакомления с документами собрания перейдите во вкладку "Архив".`, "Ошибка", 3000)
       return
     }
     if(JSON.parse(localStorage.getItem('is_verif'))!=true){

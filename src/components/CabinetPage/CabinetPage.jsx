@@ -57,9 +57,16 @@ function CabinetPage() {
                       <input type='text' className='inputText_cabinetPage' value={userData.isVerified===true ?"Да":"Нет"} disabled/>
                     </div>
                     <div className="saveBtn_container_cabinetPage">
-                    <input type='submit' className='saveData_btn_cabinetPage' value="Сохранить"/>
+                    <input type='submit' className='saveData_btn_cabinetPage' value="Сохранить" disabled={true}/>
                     </div>
                   </form>
+                  <div className="footer_container_cabinetPage">
+                    <h3>Ссылки на документы</h3>
+                    <div className="docLinks_container_cabinetPage">
+                    <a href='http://127.0.0.1:8000/download/9/' download target='_blank' className="docLink_cabinetPage">Реестр членов СНТ</a>
+                    <a href="http://127.0.0.1:8000/download/10/" download target='_blank' className="docLink_cabinetPage">Реестр членов правления СНТ</a>
+                    </div>
+                  </div>
               </div>
             </div>
       </div>

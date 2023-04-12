@@ -30,7 +30,7 @@ root.render(
                 <Route path="/user/:id/events" element={<EventsPage/>} />
                 <Route path="/user/:id/bulletdoc" element={<h1>Бюллетень</h1>} />
                 <Route path="/protocol" element={<MeetingProtocolConstructorPage/>} />
-                <Route path="/meetingresult" element={<MeetingResultPage/>} />
+                {/* <Route path="/meetingresult" element={<MeetingResultPage/>} /> */}
                 <Route path="/meetingdocs/:id" element={<MeetingDocumentsPage/>} />
                 <Route path="/votingadmin/:id" element={<VotingResultsPage/>} />
                 <Route path="/votinguser/:id" element={<VotingUserPage/>} />

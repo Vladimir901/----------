@@ -35,6 +35,8 @@ function AuthorizationPage() {
             .then(res2 => res2.data.forEach((item)=>{
               if(res1.data.snt_id==item.id){
                 localStorage.setItem('snt_name',item.name)
+                localStorage.setItem('peopleInSNT_count',item.not_govers)
+                localStorage.setItem('goversInSNT_count',item.govers)
                 navigate(`/user/${res1.data.id}/events`) 
               }
             }))

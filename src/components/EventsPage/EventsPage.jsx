@@ -53,19 +53,25 @@ function EventsPage() {
       datetimeMeeting: "26.03.2023 17:30-18:00",
       ManageProtocol: '',
       MeetingProtocol: '',
-      Decision: '',             
+      Decision: '',  
+      fileLink: "http://127.0.0.1:8000/download/18/"           
     },
     {
       id: 30002,
       datetimeMeeting: "25.03.2023 17:30-18:00",
       ManageProtocol: '',
       MeetingProtocol: '',
-      Decision: '',   
+      Decision: '', 
+      fileLink: "http://127.0.0.1:8000/download/18/"     
     },
   ]);
   useEffect(()=>{
     axios.get("http://localhost:8000/api/meetings")
-    .then(res => { setEvents(res.data.sort((elem1, elem2) => elem1.date-elem2.date)) })
+    .then(res => { setEvents(res.data) })
+    // axios.get("http://localhost:8000/api/meetings")
+    // .then(res => {
+
+    // })
     },[])
     const dnow = new Date()
     const past = events.filter( event => event.date - dnow<0)
@@ -121,7 +127,7 @@ function EventsPage() {
                 :
               <div className="archive_container_user">
                 <div className="futureEvents_user">
-                {archiveDocs.map((elem)=>{
+                {events.map((elem)=>{
                  return <Meeting key={elem.id} elem={elem}/>
                 })}
                 </div>

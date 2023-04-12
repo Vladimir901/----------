@@ -17,7 +17,7 @@
     justify-content: space-between;
     height: 70vh;
 }
-.events_container_user{
+.events_container_user, .archive_container_user{
     overflow-y: scroll;
 }
 .dropdown_user, .btnCreate_user{

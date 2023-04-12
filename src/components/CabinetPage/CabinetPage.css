@@ -64,3 +64,16 @@
     margin-bottom: 1%;
     padding: 3%;
 }
+.footer_container_cabinetPage{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    margin-top: 2%;
+}
+.docLinks_container_cabinetPage{
+    display: flex;
+    justify-content: flex-end;
+}
+.docLink_cabinetPage{
+    margin-left: 2%;
+    color: black;
+}

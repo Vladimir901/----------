@@ -47,27 +47,31 @@ function MeetingProtocolConstructorPage() {
       formdata.append("place", data.placeOfMeeting);     
       formdata.append("notification_date", dnow);     
       formdata.append("type", data.meetingType +" "+ data.meetingForm);     
-
       let res = axios.post("http://localhost:8000/api/meetings", formdata)
+
       .then(res=>{
+        console.log(data.file[0])
         var formdata1 = new FormData();
-        formdata.append("file", data.file);
-        formdata.append("name", "Протокол собрания");
-        formdata.append("type", "Протокол собрания");
-        formdata.append("meeting_id", res.data.id);
-        let res1 = axios.post('http://127.0.0.1:8000/upload/', formdata1)
-        console.log(res1)
-      })
-
-      //2
-      // 
-
-      NotificationManager.success("Уведомление успешно создано. Перенаправляем в личный кабинет...","Выполнено", 3000)
-      // setTimeout(()=>{navigate(`/user/${localStorage.getItem('user_id')}/events`, { })}, 3000)
+        formdata1.append("file", data.file[0]);
+        formdata1.append("name", "Протокол_заседания_правления");
+        formdata1.append("type", "Протокол_заседания_правления");
+        formdata1.append("meeting_id", res.data.id);
+        let res1 = axios.post('http://127.0.0.1:8000/upload/', formdata1, { headers: {'Content-Type': 'multipart/form-data'} } )
+      
+        data.reasonsOfMeeting.forEach((reason)=> {
+          console.log(reason)
+          const raw = {
+            meeting_id: res.data.id,
+            question: reason
+          }
+          let res2 = axios.post('http://127.0.0.1:8000/api/quests', raw)
+          NotificationManager.success("Уведомление успешно создано. Перенаправляем в личный кабинет...","Выполнено", 3000)
+          setTimeout(()=>{navigate(`/user/${localStorage.getItem('user_id')}/events`, { })}, 3000)
+        })     
+      } )
     }    
     //reset() сброс данных формы
   }
-  console.log(newMeetingId)
 
   const onChangeSelectValues = (e) => {
     let value = Array.from(e.target.selectedOptions, option => option.value);
@@ -129,8 +133,8 @@ function MeetingProtocolConstructorPage() {
                   <h4 className='questionTitle_text'>2. По какому поводу проводится собрание? </h4>
                 {/* <Select defaultValue={selectedOption} options={meetingQuestions} isSearchable={true} isMulti={true} placeholder="Выберите пункт..." className='meetingDateAndPlace_select'/> */}
                 <select multiple={true} className='meetingDateAndPlace_select' {...register('reasonsOfMeeting',{required: true})} onChange={onChangeSelectValues}>
-                {meetingQuestions.map((elem)=>{
-                 return <option value={elem.value}>{elem.label}</option>
+                {meetingQuestions.map((elem, index)=>{
+                 return <option key={index} value={elem.value}>{elem.label}</option>
                 })}                
                 </select>
                   {/* <h4 className='questionTitle_text'>2. Результаты голосования заседания правления</h4>  
@@ -146,35 +150,35 @@ function MeetingProtocolConstructorPage() {
                 <h4 className='questionTitle_text'>3. Вид собрания</h4>
                 <div className="meetingContainer_mpcPage">
                 <input id='r11' type='radio' name='meetingType_input' className='inputRadio_mpcPage' value={'очередное'} {...register("meetingType")} onChange={onMeetingTypeChange}/>                 
-                <label for='r11' >Очередное</label>
+                <label htmlFor='r11' >Очередное</label>
                 <img src={QuestionIcon} data-tooltip-id="my-r11" data-tooltip-content="" data-tooltip-place="right"/>
                 <br/>
                 <input id='r12' type='radio' name='meetingType_input' className='inputRadio_mpcPage' value={'внеочередное'} {...register("meetingType")} onChange={onMeetingTypeChange}/> 
-                <label for='r12' >Внеочередное</label>
+                <label htmlFor='r12' >Внеочередное</label>
                 <img src={QuestionIcon} data-tooltip-id="my-r12" data-tooltip-content="Созывается по требованию: правления, ревизионной комиссии, членов товарищества в количестве более чем одна пятая(1/5) членов товарищества (по требованию органа местного самоуправления)." data-tooltip-place="right"/>
                 </div>
                 <h4 className='questionTitle_text'>4. Форма проведения</h4>
                 <div className="meetingContainer_mpcPage">
                 <input id='r21' type='radio' name='meetingForm_input' className='inputRadio_mpcPage' value={'очное'} {...register("meetingForm")} onChange={onMeetingFormChange}/> 
-                <label for='r21'>Очная</label>               
+                <label htmlFor='r21'>Очная</label>               
                 <img src={QuestionIcon} data-tooltip-id="my-r21" data-tooltip-content="Очное собрание проводится в любых случаях и по всем вопросам и предполагает очные обсуждение вопросов повестки собрания и голосование (так называемые «голосования рукой»)." data-tooltip-place="right"/>
                 <br/>
                 <input id='r22' type='radio' name='meetingForm_input' className='inputRadio_mpcPage' {...register("meetingForm")} value={'заочное'} onChange={onMeetingFormChange}/> 
-                <label for='r22'>Заочная</label>
+                <label htmlFor='r22'>Заочная</label>
                 <img src={QuestionIcon} data-tooltip-id="my-r22" data-tooltip-content="" data-tooltip-place="right"/>
                 <br/>
                 <input id='r23' type='radio' name='meetingForm_input' className='inputRadio_mpcPage' value={'очно-заочное'} {...register("meetingForm")} onChange={onMeetingFormChange}/> 
-                <label for='r23'>Очно-заочная</label>
+                <label htmlFor='r23'>Очно-заочная</label>
                 <img src={QuestionIcon} data-tooltip-id="my-r23" data-tooltip-content="" data-tooltip-place="right"/>
                 </div>
                 <h4 className='questionTitle_text'>5. Введите место и время проведения </h4>
-                <input  type='date' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Дата' {...register('dateOfMeeting',{required: 'Введите дату встречи'})}/> 
+                <input type='date' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Дата' {...register('dateOfMeeting',{required: 'Введите дату встречи'})}/> 
                 {errors.dateOfMeeting && <div className='errorText_mpcPage'>{errors?.dateOfMeeting.message}</div>}
                 <br/>
-                <input  type='time' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Время'{...register('timeOfMeeting',{required: 'Введите время встречи'})}/>
+                <input type='time' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Время'{...register('timeOfMeeting',{required: 'Введите время встречи'})}/>
                 {errors.timeOfMeeting && <div className='errorText_mpcPage'>{errors?.timeOfMeeting.message}</div>} 
                 <br/>
-                <input  type='text' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Место' {...register('placeOfMeeting',{required: 'Введите место встречи'})}/> 
+                <input type='text' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Место' {...register('placeOfMeeting',{required: 'Введите место встречи'})}/> 
                 {errors.placeOfMeeting && <div className='errorText_mpcPage'>{errors?.placeOfMeeting.message}</div>} 
                 <br/>           
                 {/* <h4 className='questionTitle_text'>6. Дата и время оповещения? </h4>

@@ -16,6 +16,9 @@
     padding-left: 3%;
     padding-right: 0%;
 }
+.non_visible_container{
+    visibility: hidden;
+}
 .btn_votingResultsPage{
     background-color: rgb(105, 45, 45);
     border: none;
