@@ -62,7 +62,7 @@ function AuthorizationPage() {
                 {errors?.password && <p className='errorText_auth'>{errors?.password.message}</p>}
                 <input type='submit' className='btn_auth' value="Вход"/>
 
-                <Link to={'/register'}><h6 className='linkToRegister_auth'>Ещё не зарегистрированы?</h6></Link>
+                {/* <Link to={'/register'}><h6 className='linkToRegister_auth'>Ещё не зарегистрированы?</h6></Link> */}
                 </form>
             </div>
         </div>

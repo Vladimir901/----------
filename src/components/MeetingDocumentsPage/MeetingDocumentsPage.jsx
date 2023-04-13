@@ -33,15 +33,12 @@ function MeetingDocumentsPage() {
                     <h4>Уведомление о проведении общего собрания</h4>
                 </div>
                 <div className="managementDocs_container">
-                    <h4>Бюллетень для голосования общего собрания</h4>
-                </div>
-                <div className="managementDocs_container">
                     <h4>Протокол собрания</h4>                    
                 </div>
                 <div className="managementDocs_container">
                     <h4>Решение</h4>
                 </div>
-                <a href='#' download={''} className='downloadDocs_link'>Скачать архивом</a>
+                <a href='http://127.0.0.1:8000/download/20/' download target='_blank' className='downloadDocs_link'>Скачать архивом</a>
                 </div>
                 <div className="btn_container_meetingdocsPage">
                 <input type='submit' className='btn_meetingdocsPage' value="На главную"/>

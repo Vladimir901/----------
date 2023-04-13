@@ -3,8 +3,6 @@
     background: url('../images/bg1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-}
-.main_container_register{
     display: flex;
     align-items: center;
     justify-content: center;

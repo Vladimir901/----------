@@ -13,11 +13,26 @@
     width: 50%;
     padding-top: 1%;
     padding-bottom: 1%;
-    padding-left: 3%;
-    padding-right: 0%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 .non_visible_container{
     visibility: hidden;
+}
+.voting_container_votingResultsPage{
+    height: 55vh;
+    overflow-y: scroll;
+}
+.questionItemText_container textarea{
+    min-height: 3rem;
+    min-width: 12rem;
+}
+.questions_container .questionItem_container{
+    width: 55%;
+}
+.inputNumber_votingResults{
+    display: flex;
+    justify-content: space-between;
 }
 .btn_votingResultsPage{
     background-color: rgb(105, 45, 45);

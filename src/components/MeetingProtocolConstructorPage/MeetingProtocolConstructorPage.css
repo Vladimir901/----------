@@ -86,18 +86,18 @@
     justify-content: flex-start;
     flex-direction: column;
     max-width: 20%;
-    background: rgba(242, 242, 242, 0.7);
+    background: rgba(242, 242, 242, 0.9);
     border-radius: 20px;
     padding: 1% 1% 1% 2%;
     max-height: 70%;
     overflow-y: auto;
     font-size: 14px;
 }
-.headerText_leftTips_container{
+.headerText_leftTips_container, .headerText_rightTips_container{
     margin-bottom: 2px;
     text-align: center;
 }
-.leftTips_container a{
+.leftTips_container a, .rightTips_container a{
     color: rgb(20, 74, 173);
 }
 .rightTips_container{
@@ -109,9 +109,11 @@
     justify-content: flex-start;
     flex-direction: column;
     max-width: 20%;
-    background: rgba(242, 242, 242, 0.7);
+    background: rgba(242, 242, 242, 0.9);
     border-radius: 20px;
-    padding: 1%;
+    padding: 1% 1% 1% 2%;
+    overflow-y: auto;
+    max-height: 70%;
 }
 .styled-scrollbars{
     scrollbar-color: #bf3131 #333;

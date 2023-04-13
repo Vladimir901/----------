@@ -1,0 +1,29 @@
+.main_container_solvedEventPage{
+    min-height: 100vh;
+    background: url('../images/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container_solvedEventPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    width: 50%;
+    padding: 2% 1% 2% 3%;
+}
+.link_container_solvedEventPage{
+    margin-top: 3%;
+    text-align: center;
+}
+.link_container_solvedEventPage a{
+    text-decoration: none;
+    background-color: rgb(105, 45, 45);
+    border: none;
+    border-radius: 10px;
+    padding: 1%;
+    font-size: 16px;
+    color: #ffffff;
+    cursor: pointer;
+}

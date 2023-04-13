@@ -9,7 +9,7 @@ function LandingPage() {
             <Header/>
             <div className="container_landing">
                 <div className="text_container_landing"><p><b>СНТ Плюс</b> <br/> онлайн помощник для проведения собрания членов СНТ.<br/> 
-                    Мы расскажем вам с чего начать и доведем до последнего этапа - составления протокола решения.</p></div>
+                    Мы расскажем вам с чего начать и доведем до последнего этапа - составления протокола собрания и решения.</p></div>
                     <Link to={localStorage.getItem('user_id')!=undefined?`/user/${localStorage.getItem('user_id')}/events`:'/auth'}><button className='btn_landing'>Войти</button></Link>
             </div>
         </div>       

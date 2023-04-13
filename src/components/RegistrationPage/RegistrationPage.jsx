@@ -45,7 +45,7 @@ function RegistrationPage() {
                 <input type='password' className='inputText_register' {...register('password_validation',{required: 'Пароль не введён'})}/>
                 {errors?.password_validation && <p className='errorText_register'>{errors?.password_validation.message}</p>}
                 <input type='submit' className='btn_register' value="Регистрация"/>
-                <Link to={'/auth'}><h6 className='linkToAuth_register'>Уже зарегистрированы?</h6></Link>  
+                {/* <Link to={'/auth'}><h6 className='linkToAuth_register'>Уже зарегистрированы?</h6></Link>   */}
                 </form>
             </div>
         </div>

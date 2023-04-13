@@ -10,11 +10,6 @@ function VotingResultsPage() {
     const {register, formState: {errors, isValid}, handleSubmit, reset} = useForm({mode: 'onSubmit'})
     const navigate = useNavigate()
     const [questions, setQuestions] = useState([])
-    
-    // const [results, setResults] = useState(0)
-    // const [zaVotes, setZaVotes] = useState(0)
-    // const [protivVotes, setProtivVotes] = useState(0)
-    // const [dkVotes, setDKVotes] = useState(0)
     const {id} = useParams()
     
     useEffect(()=>{
@@ -28,98 +23,92 @@ function VotingResultsPage() {
     const onSubmit = (data) =>{    
       axios.get(`http://127.0.0.1:8000/api/meetings/${id}/`)
           .then(res => {
-            // console.log(res.data)   
+            let index = 1
+            let hasError = false
             if(res.data.type.split(' ')[0]=='очное' || res.data.type.split(' ')[1]=='очное'){
               questions.forEach(question =>{
-                let za = Number(document.getElementsByClassName('zaVote_'+question.id)[0].value)
-                let protiv = Number(document.getElementsByClassName('protivVote_'+question.id)[0].value)
-                let dk = Number(document.getElementsByClassName('dkVote_'+question.id)[0].value)               
-                if(za+protiv+dk>Number(localStorage.getItem('peopleInSNT_count'))) {
-                  NotificationManager.error("Количество голосов не может быть больше количества членов СНТ.", "Ошибка", 3000)
+                let za = Number(document.querySelector(`input[name="zaVote_${question.id}"]`).value)
+                let protiv = Number(document.querySelector(`input[name="protivVote_${question.id}"]`).value)
+                let dk = Number(document.querySelector(`input[name="dkVote_${question.id}"]`).value)    
+                if(za+protiv+dk>Number(localStorage.getItem('peopleInSNT_count')) && !hasError) {
+                  NotificationManager.error(`Количество голосов в вопросе №${index} не может быть больше количества членов СНТ.`, "Ошибка", 3000)
+                  index++
+                  hasError =  true
                   return
-                }               
-                if(za>(za+protiv+dk)/2+1) NotificationManager.success("Вопрос принят голосованием", "Успешно", 3000)
-                else NotificationManager.warning("Вопрос не принят голосованием", "Внимание", 3000)
-
-                //итоги
-
-                var formdata1 = new FormData();
-                formdata1.append("yes", za);
-                formdata1.append("no", protiv);
-                formdata1.append("idk", dk);
-                formdata1.append("question", question.question);
-                formdata1.append("meeting_id", res.data.id);
-                let res1 = axios.put(`http://127.0.0.1:8000/api/quests/${question.id}/`, formdata1) 
-
+                }
+                
+                else if(!hasError){
+                  if(za>(za+protiv+dk)/2+1) NotificationManager.success(`Вопрос №${index} принят голосованием`, "Успешно", 3000)
+                  else NotificationManager.warning(`Вопрос №${index} не принят голосованием`, "Внимание", 3000)
+                  let formdata1 = new FormData();
+                  formdata1.append("yes", za);
+                  formdata1.append("no", protiv);
+                  formdata1.append("idk", dk);
+                  formdata1.append("question", question.question);
+                  formdata1.append("meeting_id", res.data.id);
+                  let res1 = axios.put(`http://127.0.0.1:8000/api/quests/${question.id}/`, formdata1) 
+                  }   
+                  index++      
               })
+              DoEventSolved(res)
             }
 
-            else if(res.data.type.split(' ')[0]=='заочное' || res.data.type.split(' ')[1]=='заочное'){
-              
+            else if(res.data.type.split(' ')[0]=='заочное' || res.data.type.split(' ')[1]=='заочное'){              
               questions.forEach(question =>{           
-                console.log(question)        
                 let zaZaoch = Number(question.zaoch_yes)
                 let protivZaoch = Number(question.zaoch_no)
-                let dkZaoch = Number(question.zaoch_idk)      
-                console.log(question.zaoch_yes)        
-                console.log(question.zaoch_no)        
-                console.log(question.zaoch_idk)        
-                console.log(zaZaoch>(zaZaoch+protivZaoch+dkZaoch)/2+1)        
+                let dkZaoch = Number(question.zaoch_idk)            
                 if(zaZaoch+protivZaoch+dkZaoch>Number(localStorage.getItem('peopleInSNT_count'))) {
                   NotificationManager.error("Количество голосов не может быть больше количества членов СНТ.", "Ошибка", 3000)
+                  index++
+                  hasError = true
                   return
-                }               
-                if(zaZaoch>(zaZaoch+protivZaoch+dkZaoch)/2+1) NotificationManager.success("Вопрос принят голосованием", "Успешно", 3000)
-                else NotificationManager.warning("Вопрос не принят голосованием", "Внимание", 3000)
-
-                //итоги
-
-                // var formdata1 = new FormData();
-                // formdata1.append("zaoch_yes", zaZaoch);
-                // formdata1.append("zaoch_no", protivZaoch);
-                // formdata1.append("zaoch_idk", dkZaoch);
-                // formdata1.append("question", question.question);
-                // formdata1.append("meeting_id", question.meeting_id);
-                // let res1 = axios.put(`http://127.0.0.1:8000/api/quests/${question.id}/`, formdata1)  
-                // console.log(res1) 
-
+                }       
+                index++        
+                if(zaZaoch>(zaZaoch+protivZaoch+dkZaoch)/2+1) NotificationManager.success(`Вопрос №${index} принят голосованием`, "Успешно", 3000)
+                else NotificationManager.warning(`Вопрос №${index} не принят голосованием`, "Внимание", 3000)
               })
-              
+              DoEventSolved(res)
             }
+
             else {             
+              
               questions.forEach(question =>{
-                let za = Number(document.getElementsByClassName('zaVote_'+question.id)[0].value)
-                let protiv = Number(document.getElementsByClassName('protivVote_'+question.id)[0].value)
-                let dk = Number(document.getElementsByClassName('dkVote_'+question.id)[0].value) 
-                axios.get(`http://127.0.0.1:8000/api/meetings/${id}/`)
-                .then(res => {               
-                  let zaZaoch = Number(res.zaoch_yes)
-                  let protivZaoch = Number(res.zaoch_no)
-                  let dkZaoch = Number(res.zaoch_idk)             
+                let za = Number(document.querySelector(`input[name="zaVote_${question.id}"]`).value)
+                let protiv = Number(document.querySelector(`input[name="protivVote_${question.id}"]`).value)
+                let dk = Number(document.querySelector(`input[name="dkVote_${question.id}"]`).value)    
+                                             
+                let zaZaoch = Number(question.zaoch_yes)
+                let protivZaoch = Number(question.zaoch_no)
+                let dkZaoch = Number(question.zaoch_idk)  
+
                 if(za+protiv+dk+zaZaoch+protivZaoch+dkZaoch>Number(localStorage.getItem('peopleInSNT_count'))) {
-                  NotificationManager.error("Количество голосов не может быть больше количества членов СНТ.", "Ошибка", 3000)
+                  NotificationManager.error(`Общее количество голосов в вопросе №${index} не может быть больше количества членов СНТ.`, "Ошибка", 3000)
+                  index++
+                  hasError =  true
                   return
-                }               
-                if((za+zaZaoch)>(za+protiv+dk+zaZaoch+protivZaoch+dkZaoch)/2+1) NotificationManager.success("Вопрос принят голосованием", "Успешно", 3000)
-                else NotificationManager.warning("Вопрос не принят голосованием", "Внимание", 3000)
-
-                //итоги
-
-                var formdata1 = new FormData();
-                formdata1.append("yes", za);
-                formdata1.append("no", protiv);
-                formdata1.append("idk", dk);
-                formdata1.append("zaoch_yes", zaZaoch);
-                formdata1.append("zaoch_no", protivZaoch);
-                formdata1.append("zaoch_idk", dkZaoch);
-                formdata1.append("question", question.question);
-                formdata1.append("meeting_id", res.data.id);
-                let res1 = axios.put(`http://127.0.0.1:8000/api/quests/${question.id}/`, formdata1)   
-              }) 
+                }            
+                if(!hasError){
+                  if((za+zaZaoch)>(za+protiv+dk+zaZaoch+protivZaoch+dkZaoch)/2+1) NotificationManager.success(`Вопрос №${index} принят голосованием`, "Успешно", 3000)
+                  else NotificationManager.warning(`Вопрос №${index} не принят голосованием`, "Внимание", 3000)                
+                  let formdata1 = new FormData();
+                  formdata1.append("yes", za);
+                  formdata1.append("no", protiv);
+                  formdata1.append("idk", dk);
+                  formdata1.append("question", question.question);
+                  formdata1.append("meeting_id", res.data.id);
+                  let res1 = axios.put(`http://127.0.0.1:8000/api/quests/${question.id}/`, formdata1)   
+                  DoEventSolved(res)
+                }
+                index++
               })
             }
+           
+            if(!hasError)
+            {
             NotificationManager.success("Переходим на вкладку с документами...","Выполнено", 5000)
-            // setTimeout(()=>{navigate(`/meetingdocs/1`)},5000)   
+            setTimeout(()=>{navigate(`/meetingdocs/1`)},5000) 
+            }
           })
 
           // let countVoters = Number(data.forAnswers_first)+Number(data.againstAnswers_first)+Number(data.neutralAnswers_first);
@@ -133,6 +122,18 @@ function VotingResultsPage() {
           // setTimeout(()=>{navigate(`/meetingdocs/1`)},5000)                    
        }
 
+       const DoEventSolved = (res) =>{
+          let formdata2 = new FormData();
+          formdata2.append("time", res.data.time);
+          formdata2.append("date", res.data.date);
+          formdata2.append("notification_date", res.data.notification_date);
+          formdata2.append("place", res.data.place);
+          formdata2.append("type", res.data.type);
+          formdata2.append("snt_id", res.data.snt_id);
+          formdata2.append("is_solved", true);
+          let res2 = axios.put(`http://127.0.0.1:8000/api/meetings/${id}/`, formdata2)
+       }
+
     return (
     <div>
         <Header/>
@@ -142,28 +143,19 @@ function VotingResultsPage() {
             <h1 className='headerText_votingResultsPage'>Введите результаты голосования собрания</h1>
             <div className="voting_container_votingResultsPage">
             {questions.map(elem=>{
-              return <div className="questions_container" key={elem.id}>
+              return <div key={elem.id}>
               <h3>Вопрос: {elem.question}</h3>
-              <div className="questionItem_container"><h4>За</h4><input type='number' className={`zaVote_${elem.id} inputNumber_votingResults`} placeholder='Введите число' {...register(`zaVote_${elem.id}`,{required: true})}/> </div>
-              <div className="questionItem_container"><h4>Против</h4><input type='number' placeholder='Введите число' {...register(`protivVote_${elem.id}`,{required: true})} className='inputNumber_votingResults'/></div>
-              <div className="questionItem_container"><h4>Воздержался</h4><input type='number' placeholder='Введите число' {...register(`dkVote_${elem.id}`,{required: true})} className='inputNumber_votingResults'/></div>
+              <div className="questions_container">
+              <div className="questionItem_container"><h4>За</h4><input type='number' name={`zaVote_${elem.id}`} className={` inputNumber_votingResults`} placeholder='Введите число' {...register(`zaVote_${elem.id}`,{required: true})}/> </div>
+              <div className="questionItem_container"><h4>Против</h4><input type='number' name={`protivVote_${elem.id}`} placeholder='Введите число' {...register(`protivVote_${elem.id}`,{required: true})} className='inputNumber_votingResults'/></div>
+              <div className="questionItem_container"><h4>Воздержался</h4><input type='number' name={`dkVote_${elem.id}`} placeholder='Введите число' {...register(`dkVote_${elem.id}`,{required: true})} className='inputNumber_votingResults'/></div>
+              <div className="questionItemText_container"><h4>Решение</h4><textarea name={`decisionVote_${elem.id}`} placeholder='Введите решение' {...register(`decisionVote_${elem.id}`,{required: true})} className='inputTextarea_votingResults'/></div>
+              </div>
             </div>
             })}
             </div> 
             {/* <h3>Итоги голосования</h3> */}
-
-
-
-            {/* <h4 className='voting_text_votingResultsPage'>1.{id==1 ? "" : ""}
-               Утверждение финансово-экономического обоснования взносов на 2023г. финансовый год</h4>
-            <h5>За</h5><input type='text' className='inputText_votingResultsPage' placeholder='Количество голосов' {...register('forAnswers_first',{required: 'Введите количество голосов'})}/>
-            <h5>Против</h5><input type='text' className='inputText_votingResultsPage' placeholder='Количество голосов' {...register('againstAnswers_first',{required: 'Введите количество голосов'})}/>
-            <h5>Воздержались</h5><input type='text' className='inputText_votingResultsPage' placeholder='Количество голосов' {...register('neutralAnswers_first',{required: 'Введите количество голосов'})}/>          
-            
-            <h4 className='voting_text_votingResultsPage'>2. Утверждение приходно-расходной сметы товарищества на 2023г. финансовый год</h4>
-            <h5>За</h5> <input type='text' className='inputText_votingResultsPage' placeholder='Количество голосов' {...register('forAnswers_second',{required: 'Введите количество голосов'})}/>
-            <h5>Против</h5><input type='text' className='inputText_votingResultsPage' placeholder='Количество голосов' {...register('againstAnswers_second',{required: 'Введите количество голосов'})}/>
-            <h5>Воздержались</h5><input type='text' className='inputText_votingResultsPage' placeholder='Количество голосов' {...register('neutralAnswers_second',{required: 'Введите количество голосов'})}/>   */}                    
+                   
             <div className="votingResultsPage_btn_container">
             <input type='submit' className='btn_votingResultsPage' value="Создать протокол и решение"/>
             </div>       

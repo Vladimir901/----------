@@ -15,6 +15,14 @@
     padding-left: 3%;
     padding-right: 3%;
 }
+.form_scroll{
+    height: 55vh;
+    overflow-y: auto;
+}
+.btn_container_votingPage{
+    display: flex;
+    justify-content: center;
+}
 .btn_votingPage{
     background-color: rgb(105, 45, 45);
     border: none;
@@ -24,4 +32,12 @@
     color: #ffffff;
     cursor: pointer;
     margin-top: 1%;
+}
+.questions_container{
+    margin: 1% 0 2% 0;
+}
+.questionItem_votingPage{
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
 }
