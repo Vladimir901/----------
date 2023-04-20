@@ -11,9 +11,16 @@
     background: rgba(242, 242, 242, 0.7);
     border-radius: 20px;
     width: 40%;
-    padding-left: 2%;
-    max-height: 80vh;
-    overflow-y: scroll;
+    padding: 2%;
+    /* padding-left: 2%; */
+    /* max-height: 80vh; */
+    /* overflow-y: scroll; */
+}
+.form_container_mpcPage form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .meetingContainer_mpcPage{
     margin-bottom: 1%;

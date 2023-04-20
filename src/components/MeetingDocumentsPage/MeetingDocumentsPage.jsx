@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './MeetingDocumentsPage.css'
 import Header from '../Header/Header'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 function MeetingDocumentsPage() {
     const {register, formState: {errors, isValid}, handleSubmit, reset} = useForm({mode: 'onSubmit'})
     const navigate = useNavigate()
+    // const [downloadLink, setDownloadLink] = useState("")
+    const {id} = useParams()
     const onSubmit = (data) =>{
-        if(data)
-            {
-            navigate('/', {  }) 
-            
+        if(data) {
+            navigate('/')            
         }
         //alert(JSON.stringify(data.questionsSelection))
         //reset() сброс данных формы
@@ -38,7 +39,7 @@ function MeetingDocumentsPage() {
                 <div className="managementDocs_container">
                     <h4>Решение</h4>
                 </div>
-                <a href='http://127.0.0.1:8000/download/20/' download target='_blank' className='downloadDocs_link'>Скачать архивом</a>
+                <a href={`http://127.0.0.1:8000/docs/download/${id}/`} download target='_blank' className='downloadDocs_link'>Скачать архивом</a>
                 </div>
                 <div className="btn_container_meetingdocsPage">
                 <input type='submit' className='btn_meetingdocsPage' value="На главную"/>

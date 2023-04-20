@@ -31,8 +31,9 @@
     width: 55%;
 }
 .inputNumber_votingResults{
-    display: flex;
-    justify-content: space-between;
+    width: 30%;
+    padding: 1%;
+    border-radius: 4px;
 }
 .btn_votingResultsPage{
     background-color: rgb(105, 45, 45);
@@ -58,7 +59,17 @@
 .votingResultsPage_btn_container{
     display: flex;
     justify-content: center;
+    margin-top: 1%;
 }
 .voting_text_votingResultsPage{
     margin-bottom: 1%;
+}
+.listPers_container{
+    position: absolute;
+    text-align: center;
+    top: 20%;
+    right: 0;
+    width: 20%;
+    padding: 1%;
+    background: rgba(242, 242, 242, 0.7);
 }

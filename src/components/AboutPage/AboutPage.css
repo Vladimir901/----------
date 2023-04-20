@@ -1,0 +1,15 @@
+.main_container_aboutPage{
+    min-height: 100vh;
+    background: url('../images/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container_aboutPage{
+    background: rgba(242, 242, 242, 0.7);
+    border-radius: 20px;
+    width: 60%;
+    padding: 2%;
+}

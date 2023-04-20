@@ -33,9 +33,6 @@
     margin-left: 2%;
     font-size: 14px;
 }
-.content_container_cabinetPage{
-
-}
 .form_container_cabinetPage{
     width: 60%;
     display: flex;
@@ -75,5 +72,6 @@
 }
 .docLink_cabinetPage{
     margin-left: 2%;
-    color: black;
+    color: rgb(20, 74, 173);
+
 }

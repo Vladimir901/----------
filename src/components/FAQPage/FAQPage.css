@@ -11,10 +11,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 85%;
     margin-top: 10%;
     margin-bottom: 5%;
-
 }
 .content_container_faqPage{
     background: rgba(242, 242, 242, 0.7);
@@ -29,4 +28,13 @@
 }
 .answerLinks a{
     color: rgb(20, 74, 173);
+}
+.tip_container_faqPage{
+    position: absolute;
+    left: 1%;
+    top: 15%;
+    border-radius: 20px;
+    background: rgba(242, 242, 242, 0.94);
+    max-width: 10%;
+    padding: 1%;
 }

@@ -16,6 +16,7 @@ import FAQPage from './components/FAQPage/FAQPage';
 import CabinetPage from './components/CabinetPage/CabinetPage';
 import VotingUserPage from './components/VotingUserPage/VotingUserPage';
 import SolvedEventInfo from './components/SolvedEventInfoPage/SolvedEventInfoPage';
+import AboutPage from './components/AboutPage/AboutPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,14 +30,12 @@ root.render(
                 <Route path="/user/:id/cabinet" element={<CabinetPage/>} />
                 <Route path="/user/:id/events" element={<EventsPage/>} />
                 <Route path="/user/:id/events/:meeting_id" element={<SolvedEventInfo/>} />
-                <Route path="/user/:id/bulletdoc" element={<h1>Бюллетень</h1>} />
                 <Route path="/protocol" element={<MeetingProtocolConstructorPage/>} />
-                {/* <Route path="/meetingresult" element={<MeetingResultPage/>} /> */}
                 <Route path="/meetingdocs/:id" element={<MeetingDocumentsPage/>} />
                 <Route path="/votingadmin/:id" element={<VotingResultsPage/>} />
                 <Route path="/votinguser/:id" element={<VotingUserPage/>} />
                 <Route path="/faq" element={<FAQPage/>} />
-                <Route path="/calc" element={<h1>Калькуляторы</h1>} />
+                <Route path="/about" element={<AboutPage/>} />
                 <Route path="*" element={<NotFound/>} />               
               </Routes>
               <NotificationContainer />

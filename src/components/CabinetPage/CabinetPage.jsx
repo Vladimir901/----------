@@ -5,17 +5,25 @@ import './CabinetPage.css'
 import { useForm } from 'react-hook-form'
 
 function CabinetPage() {
-  const [userData, setUserData] = useState({
-    surname: localStorage.getItem('user_fio').split(' ')[0],
-    name: localStorage.getItem('user_fio').split(' ')[1],
-    middle_name: localStorage.getItem('user_fio').split(' ')[2],
-    snt_name: localStorage.getItem('snt_name'),
-    place:"",
-    isVerified: JSON.parse(localStorage.getItem('is_verif'))
-  })
+  const [userData, setUserData] = useState({})
   const {id} = useParams()
   const navigate = useNavigate()
   const {register, formState: {errors, isValid}, handleSubmit, reset} = useForm({mode: 'onSubmit'})
+  useEffect(()=>{
+    if(localStorage.getItem('user_fio')=="" || localStorage.getItem('user_fio')==null || localStorage.getItem('user_fio')==undefined)
+    navigate('/auth')
+    else
+    {
+      setUserData({
+        surname: localStorage.getItem('user_fio').split(' ')[0],
+        name: localStorage.getItem('user_fio').split(' ')[1],
+        middle_name: localStorage.getItem('user_fio').split(' ')[2],
+        snt_name: localStorage.getItem('snt_name'),
+        place:"",
+        isVerified: JSON.parse(localStorage.getItem('is_verif'))
+      })
+    }
+  },[])
 
   return (
     <div>
@@ -25,7 +33,7 @@ function CabinetPage() {
               <div className="header_container_cabinetPage">
                 <h2>Личная информация</h2>
                 <div className="btn_container_cabinetPage">
-                <button className='btn_cabinetPage' onClick={(e)=>{e.preventDefault(); navigate(`/user/${id}/bulletdoc`)}} disabled>Заявки участников</button>
+                {JSON.parse(localStorage.getItem('is_admin'))==true && <button className='btn_cabinetPage' onClick={(e)=>{e.preventDefault(); navigate(`/user/${id}/bulletdoc`)}} disabled>Заявки участников</button>}
                 <button className='btn_cabinetPage' onClick={(e)=>{e.preventDefault(); navigate(`/user/${id}/events`)}}>Перейти к собраниям</button>
                 <button className='btn_cabinetPage' onClick={(e)=>{e.preventDefault(); localStorage.clear(); navigate('/')}}>Выйти из аккаунта</button>
                 </div>                
@@ -60,13 +68,14 @@ function CabinetPage() {
                     {/* <input type='submit' className='saveData_btn_cabinetPage' value="Сохранить" disabled={true}/> */}
                     </div>
                   </form>
+                  {JSON.parse(localStorage.getItem('is_admin'))==true &&
                   <div className="footer_container_cabinetPage">
                     <h3>Ссылки на документы</h3>
                     <div className="docLinks_container_cabinetPage">
-                    <a href='http://127.0.0.1:8000/download/21/' download target='_blank' className="docLink_cabinetPage">Реестр членов СНТ</a>
-                    <a href="http://127.0.0.1:8000/download/22/" download target='_blank' className="docLink_cabinetPage">Реестр членов правления СНТ</a>
+                    <a href='http://127.0.0.1:8000/download/176/' download target='_blank' className="docLink_cabinetPage">Реестр членов СНТ</a>
+                    <a href="http://127.0.0.1:8000/download/175/" download target='_blank' className="docLink_cabinetPage">Реестр членов правления СНТ</a>
                     </div>
-                  </div>
+                  </div>}
               </div>
             </div>
       </div>

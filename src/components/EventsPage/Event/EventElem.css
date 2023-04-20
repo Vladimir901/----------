@@ -1,5 +1,5 @@
 .eventElem{
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 20px;
     padding: 2%;
     margin-bottom: 1%;
@@ -11,5 +11,5 @@
     justify-content: space-between;
 }
 .linkToPage{
-    color: black;
+    /* color: black; */
 }

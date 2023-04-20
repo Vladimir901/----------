@@ -29,47 +29,55 @@ function MeetingProtocolConstructorPage() {
         NotificationManager.error("Не загружен протокол заседания правления.","Ошибка", 3000)
         return
       }
-      let d1 = new Date("2011/02/15 00:00:00")
-      let d2 = new Date("2011/02/01 00:00:00")
-      let dnow = new Date();
-      let dmeet = new Date(data.dateOfMeeting+' '+data.timeOfMeeting)
+      // let d1 = new Date("2011/02/15 00:00:00")
+      // let d2 = new Date("2011/02/01 00:00:00")
+      // let dnow = new Date()
+      // let dmeet = new Date(data.dateOfMeeting+' '+data.timeOfMeeting)
 
-      if(Math.abs(dmeet-dnow)<Math.abs(d1-d2)){ 
-        NotificationManager.error("Создать уведомление можно не позднее, чем за 2 недели до его начала","Ошибка", 5000)
-        return
-      }
-      let formdata = new FormData();
-      formdata.append("snt_id", localStorage.getItem('snt_id'));
-      formdata.append("time", data.timeOfMeeting);
-      formdata.append("date", data.dateOfMeeting);
-      formdata.append("place", data.placeOfMeeting);     
-      formdata.append("notification_date", dnow);     
-      formdata.append("type", data.meetingType +" "+ data.meetingForm);     
-      let res = axios.post("http://localhost:8000/api/meetings", formdata)
+      // if(Math.abs(dmeet-dnow)<Math.abs(d1-d2)){ 
+      //   NotificationManager.error("Создать уведомление можно не позднее, чем за 2 недели до его начала","Ошибка", 5000)
+      //   return
+      // }
+      // let formdata = new FormData();
+      // formdata.append("snt_id", localStorage.getItem('snt_id'));
+      // formdata.append("time", data.timeOfMeeting);
+      // formdata.append("date", data.dateOfMeeting);
+      // formdata.append("place", data.placeOfMeeting);     
+      // formdata.append("notification_date", dnow);     
+      // formdata.append("type", data.meetingType +" "+ data.meetingForm);     
+      // let res = axios.post("http://localhost:8000/api/meetings", formdata)
 
-      .then(res=>{
+      // .then(res=>{
+        let formdata = new FormData();
+        formdata.append("snt_id", localStorage.getItem('snt_id'));
+        let res = axios.post('http://127.0.0.1:8000/api/meetings', formdata)
+        .then(res1 => {
+          let formdata1 = new FormData();
+          formdata1.append("file", data.file[0]);
+          formdata1.append("name", "Протокол_заседания_правления");
+          formdata1.append("type", "Протокол_заседания_правления");
+          formdata1.append("meeting_id", res1.data.id);
+          let res2 = axios.post('http://127.0.0.1:8000/upload/', formdata1)
+        })
         
-        let formdata1 = new FormData();
-        formdata1.append("file", data.file[0]);
-        formdata1.append("name", "Протокол_заседания_правления");
-        formdata1.append("type", "Протокол_заседания_правления");
-        formdata1.append("meeting_id", res.data.id);
-        let res1 = axios.post('http://127.0.0.1:8000/upload/', formdata1, { headers: {'Content-Type': 'multipart/form-data'} } )
+        
       
-        data.reasonsOfMeeting.forEach((reason)=> {
-          const raw = {
-            meeting_id: res.data.id,
-            question: reason
-          }
-          let res2 = axios.post('http://127.0.0.1:8000/api/quests', raw)
+
+        // data.reasonsOfMeeting.forEach((reason)=> {
+        //   const raw = {
+        //     meeting_id: res.data.id,
+        //     question: reason
+        //   }
+        //   let res2 = axios.post('http://127.0.0.1:8000/api/quests', raw)
           
-        }) 
+        // }) 
+
         NotificationManager.success("Уведомление успешно создано. Перенаправляем в личный кабинет...","Выполнено", 3000)
-          setTimeout(()=>{navigate(`/user/${localStorage.getItem('user_id')}/events`, { })}, 3000)    
-      } )
+        setTimeout(()=>{navigate(`/user/${localStorage.getItem('user_id')}/events`, { })}, 3000)    
+      } 
     }    
     //reset() сброс данных формы
-  }
+  
 
   const onChangeSelectValues = (e) => {
     let value = Array.from(e.target.selectedOptions, option => option.value);
@@ -112,13 +120,12 @@ function MeetingProtocolConstructorPage() {
       <div className="main_container_mpcPage">     
             <div className="form_container_mpcPage">
               <form onSubmit={handleSubmit(onSubmit)}>
-                <h2 className='headerText_mpcPage'>Введите данные</h2>
-                <h4 className='questionTitle_text'>1. Загрузите протокол заседания правления </h4>
-                <div className="meetingDateAndPlace_link">
-                  <input type='file' className='uploadFile_btn' {...register("file")}/>
+                {/* <h2 className='headerText_mpcPage'>Введите данные</h2> */}
+                <h2 className='questionTitle_text' style={{textAlign: "center"}}>Загрузите протокол заседания правления </h2>
+                {/* <div className="meetingDateAndPlace_link"> */}
+                  <input type='file' className='uploadFile_btn' style={{marginTop: "3%"}} {...register("file")}/>
                   <br/>
-                  <h4 className='questionTitle_text'>2. По какому поводу проводится собрание? </h4>
-                {/* <Select defaultValue={selectedOption} options={meetingQuestions} isSearchable={true} isMulti={true} placeholder="Выберите пункт..." className='meetingDateAndPlace_select'/> */}
+                  {/* <h4 className='questionTitle_text'>2. По какому поводу проводится собрание? </h4>
                 <select multiple={true} className='meetingDateAndPlace_select' {...register('reasonsOfMeeting',{required: true})} onChange={onChangeSelectValues}>
                 {meetingQuestions.map((elem, index)=>{
                  return <option key={index} value={elem.value}>{elem.label}</option>
@@ -128,25 +135,20 @@ function MeetingProtocolConstructorPage() {
                 <div className="meetingContainer_mpcPage">
                 <input id='r11' type='radio' name='meetingType_input' className='inputRadio_mpcPage' value={'очередное'} {...register("meetingType")} onChange={onMeetingTypeChange}/>                 
                 <label htmlFor='r11' >Очередное</label>
-                {/* <img src={QuestionIcon} data-tooltip-id="my-r11" data-tooltip-content="" data-tooltip-place="right"/> */}
                 <br/>
                 <input id='r12' type='radio' name='meetingType_input' className='inputRadio_mpcPage' value={'внеочередное'} {...register("meetingType")} onChange={onMeetingTypeChange}/> 
                 <label htmlFor='r12' >Внеочередное</label>
-                {/* <img src={QuestionIcon} data-tooltip-id="my-r12" data-tooltip-content="Созывается по требованию: правления, ревизионной комиссии, членов товарищества в количестве более чем одна пятая(1/5) членов товарищества (по требованию органа местного самоуправления)." data-tooltip-place="right"/> */}
                 </div>
                 <h4 className='questionTitle_text'>4. Форма проведения</h4>
                 <div className="meetingContainer_mpcPage">
                 <input id='r21' type='radio' name='meetingForm_input' className='inputRadio_mpcPage' value={'очное'} {...register("meetingForm")} onChange={onMeetingFormChange}/> 
                 <label htmlFor='r21'>Очная</label>               
-                {/* <img src={QuestionIcon} data-tooltip-id="my-r21" data-tooltip-content="Очное собрание проводится в любых случаях и по всем вопросам и предполагает очные обсуждение вопросов повестки собрания и голосование (так называемые «голосования рукой»)." data-tooltip-place="right"/> */}
                 <br/>
                 <input id='r22' type='radio' name='meetingForm_input' className='inputRadio_mpcPage' {...register("meetingForm")} value={'заочное'} onChange={onMeetingFormChange}/> 
                 <label htmlFor='r22'>Заочная</label>
-                {/* <img src={QuestionIcon} data-tooltip-id="my-r22" data-tooltip-content="" data-tooltip-place="right"/> */}
                 <br/>
                 <input id='r23' type='radio' name='meetingForm_input' className='inputRadio_mpcPage' value={'очно-заочное'} {...register("meetingForm")} onChange={onMeetingFormChange}/> 
                 <label htmlFor='r23'>Очно-заочная</label>
-                {/* <img src={QuestionIcon} data-tooltip-id="my-r23" data-tooltip-content="" data-tooltip-place="right"/> */}
                 </div>
                 <h4 className='questionTitle_text'>5. Введите место и время проведения </h4>
                 <input type='date' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Дата' {...register('dateOfMeeting',{required: 'Введите дату встречи'})}/> 
@@ -158,31 +160,22 @@ function MeetingProtocolConstructorPage() {
                 <input type='text' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Место' {...register('placeOfMeeting',{required: 'Введите место встречи'})}/> 
                 {errors.placeOfMeeting && <div className='errorText_mpcPage'>{errors?.placeOfMeeting.message}</div>} 
                 <br/>           
-                {/* <h4 className='questionTitle_text'>6. Дата и время оповещения? </h4>
-                  <input  type='date' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Дата' {...register('dataOfAlarming',{required: false})}/> 
-                  <input  type='time' name='meetingDateAndPlace_textInput' className='inputText_mpcPage' placeholder='Дата' {...register('timeOfAlarming',{required: false})}/>                 */}
-                  {/* <Link to={''} onClick={()=>{NotificationManager.info("Функция находится в разработке","Внимание", 3000)}}>У меня нет протокола заседания правления</Link> */}
                 </div>              
-                <br/>
+                <br/> */}
                 <div className="meetingDateAndPlace_btn_container">
                 <input type='submit' className='btn_mpcPage' value="Создать уведомление"/>
                 </div>
-                <Tooltip id='my-r11' className='tooltip'/>
-                <Tooltip id='my-r12' className='tooltip'/>
-                <Tooltip id='my-r21' className='tooltip'/>
-                <Tooltip id='my-r22' className='tooltip'/>
-                <Tooltip id='my-r23' className='tooltip'/>
                 </form>
             </div>
         </div>
-        <div className="leftTips_container">
+        {/* <div className="leftTips_container">
           <h3 className='headerText_leftTips_container'>Справка по типу и форме собрания</h3>
           <div dangerouslySetInnerHTML={{__html: leftTipText}}></div>      
         </div>
         <div className="rightTips_container">
           <h3 className='headerText_rightTips_container'>Справка по вопросам собрания</h3>
           <div dangerouslySetInnerHTML={{__html: rightTipText}}></div>
-        </div>
+        </div> */}
       </div>
   )
 }
